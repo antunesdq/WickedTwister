@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/lineseparator"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/lineseparator"
+        app:layout_constraintTop_toBottomOf="@id/lineseparator"
+        android:background="@drawable/transactionbackground">
+
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:circularflow_radiusInDP="40dp"
+            android:background="@drawable/flag"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tra_card_acc_alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank of Sweden"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@id/flag"
+            app:layout_constraintTop_toTopOf="@id/flag"
+            app:layout_constraintBottom_toBottomOf="@id/flag"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/tra_card_tra_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SEK 6768.00"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flag"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/tra_card_tag_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tra_card_tra_value"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tra_card_tra_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scania AB"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tra_card_tra_value"
+            app:layout_constraintBottom_toBottomOf="@id/tra_card_tra_value"
+            app:layout_constraintTop_toTopOf="@id/tra_card_tra_value"
+            android:layout_marginStart="100dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tra_card_tra_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021-10-21"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/tra_card_tra_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="2dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

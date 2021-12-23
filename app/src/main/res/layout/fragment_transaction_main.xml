@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TransactionMain">
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/top_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Pie chart starts here -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/main_account_pie_chart"
+
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+
+        app:circularflow_radiusInDP="1000dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/main_account_pie_chart_total_value"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintLeft_toLeftOf="@id/main_account_pie_chart"
+        app:layout_constraintRight_toRightOf="@id/main_account_pie_chart"
+        app:layout_constraintBottom_toBottomOf="@id/main_account_pie_chart"
+        app:layout_constraintTop_toTopOf="@id/main_account_pie_chart"
+
+        android:text="@string/account_money"
+        android:textAlignment="center"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/main_account_pie_chart_budget_value"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintRight_toRightOf="@id/main_account_pie_chart_total_value"
+        app:layout_constraintTop_toBottomOf="@id/main_account_pie_chart_total_value"
+
+        android:text="@string/unset_money"
+        android:textAlignment="center"
+        android:textSize="13sp"/>
+    <!-- Pie chart ends here -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_account_recycler_view"
+        android:layout_width="170dp"
+        android:layout_height="190dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="15dp"
+        tools:listitem="@layout/transaction_card"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

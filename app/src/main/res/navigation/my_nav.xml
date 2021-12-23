@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/login_signin_button">
+
+    <fragment
+        android:id="@+id/login_signin_button"
+        android:name="com.example.wickedtwister.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_addUser"
+            app:destination="@id/addUser"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_Login_to_userMain"
+            app:destination="@id/userMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUser"
+        android:name="com.example.wickedtwister.AddUser"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" >
+        <action
+            android:id="@+id/action_AddUser_to_userMain"
+            app:destination="@id/userMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/userMain"
+        android:name="com.example.wickedtwister.UserMain"
+        android:label="fragment_user_main"
+        tools:layout="@layout/fragment_user_main" >
+        <action
+            android:id="@+id/action_userMain_to_userDetails"
+            app:destination="@id/userDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="userid"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetails"
+        android:name="com.example.wickedtwister.UserDetails"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" >
+        <action
+            android:id="@+id/action_userDetails_to_userMain"
+            app:destination="@id/userMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_userDetails_to_accountMain"
+            app:destination="@id/accountMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_userDetails_to_addAccount"
+            app:destination="@id/addAccount" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAccount"
+        android:name="com.example.wickedtwister.AddAccount"
+        android:label="fragment_add_account"
+        tools:layout="@layout/fragment_add_account" >
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_addAccount_to_userDetails"
+            app:destination="@id/userDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountMain"
+        android:name="com.example.wickedtwister.AccountMain"
+        android:label="fragment_account_main"
+        tools:layout="@layout/fragment_account_main" >
+        <action
+            android:id="@+id/action_accountMain_to_userMain"
+            app:destination="@id/userMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_accountMain_to_userDetails"
+            app:destination="@id/userDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_accountMain_to_transactionMain"
+            app:destination="@id/transactionMain" />
+        <argument
+            android:name="accountMain"
+            app:argType="com.example.wickedtwister.Account" />
+        <action
+            android:id="@+id/action_accountMain_to_addTransaction"
+            app:destination="@id/addTransaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionMain"
+        android:name="com.example.wickedtwister.TransactionMain"
+        android:label="fragment_transaction_main"
+        tools:layout="@layout/fragment_transaction_main" >
+        <action
+            android:id="@+id/action_transactionMain_to_accountMain"
+            app:destination="@id/accountMain"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
+        <argument
+            android:name="accountMain"
+            app:argType="com.example.wickedtwister.Account" />
+        <argument
+            android:name="transactionMain"
+            app:argType="com.example.wickedtwister.Transaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTransaction"
+        android:name="com.example.wickedtwister.AddTransaction"
+        android:label="fragment_add_transaction"
+        tools:layout="@layout/fragment_add_transaction" >
+        <argument
+            android:name="accountMain"
+            app:argType="com.example.wickedtwister.Account" />
+        <action
+            android:id="@+id/action_addTransaction_to_accountMain"
+            app:destination="@id/accountMain" />
+    </fragment>
+</navigation>

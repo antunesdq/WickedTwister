@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="390dp"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:contentDescription="@string/flag" />
+
+    <!-- Doughnut chart starts here -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+
+
+        app:circularflow_radiusInDP="1000dp"/>
+
+    <TextView
+        android:id="@+id/main_user_pie_chart_total_value"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintLeft_toLeftOf="@id/pie_chart"
+        app:layout_constraintRight_toRightOf="@id/pie_chart"
+        app:layout_constraintBottom_toBottomOf="@id/pie_chart"
+        app:layout_constraintTop_toTopOf="@id/pie_chart"
+
+        android:text="@string/account_money"
+        android:textAlignment="center"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/pie_chart_secondary_text_view"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintRight_toRightOf="@id/main_user_pie_chart_total_value"
+        app:layout_constraintTop_toBottomOf="@id/main_user_pie_chart_total_value"
+
+        android:text="@string/unset_money"
+        android:textAlignment="center"
+        android:textSize="11sp"/>
+    <!-- Doughnut chart ends here -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/pie_chart"
+        app:layout_constraintTop_toTopOf="@id/pie_chart"
+        android:text="@string/bank_of_sweden"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
