@@ -33,10 +33,10 @@
 
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pie_chart"
+                    app:layout_constraintTop_toBottomOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
 
-                    tools:listitem="@layout/transaction_test_item"/>
+                    tools:listitem="@layout/transaction_card_for_account_card"/>
 
             </androidx.core.widget.NestedScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>

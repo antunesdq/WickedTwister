@@ -1,16 +1,13 @@
 package com.example.wickedtwister
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
@@ -20,57 +17,53 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 
-class UserMain : Fragment() {
-    private val args by navArgs<UserMainArgs>()
-    private lateinit var usr: User
+class AccountAdapter(private val dataset: List<Account>, val context: Context):
+    RecyclerView.Adapter<AccountAdapter.MyViewHolder>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        usr= User(usrId = args.userid)
-        usr.get()
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val pieChartTra: PieChart = view.findViewById(R.id.account_card_pie_chart)
+        val pieChartBud: PieChart = view.findViewById(R.id.account_card_pie_chart_bud)
+        val transactionRv: RecyclerView = view.findViewById(R.id.account_card_recycler_view)
+        val accountsAlias: TextView = view.findViewById(R.id.account_card_acc_alias)
+        val TraTw:TextView = view.findViewById(R.id.account_card_pie_chart_total_value)
+        val BudTw:TextView = view.findViewById(R.id.account_card_pie_chart_budget_value)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_user_main, container, false)
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MyViewHolder {
+        // Create a new view, which defines the UI of the list item
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.account_card, viewGroup, false)
 
-        val usrNameTV = view.findViewById<TextView>(R.id.user_main_user_nickname)
-        usrNameTV.text = usr.usrNickname
-
-        val pieChartTextView: TextView = view.findViewById(R.id.main_user_pie_chart_total_value)
-
-        val pieChartSecondaryTextView: TextView = view.findViewById(R.id.main_user_pie_chart_budget_value)
-
-        val pieChartTra:PieChart = view.findViewById(R.id.main_user_pie_chart)
-
-        val pieChartBud:PieChart = view.findViewById(R.id.main_user_pie_chart_bud)
-
-        val transactionRecyclerView:RecyclerView = view.findViewById(R.id.main_user_recycler_view)
-
-        pieChartTra.setOnClickListener {
-            val action = UserMainDirections.actionUserMainToUserDetails(usr)
-            findNavController().navigate(action)
-        }
-
-        usr.getAccounts()
-        usr.serial()
-
-        createPieChart(
-            pieChartTextView = pieChartTextView,
-            pieChartSecondaryTextView = pieChartSecondaryTextView,
-            pieChartTra = pieChartTra,
-            pieChartBud = pieChartBud,
-            MapTra = usr.serialTra,
-            MapBud = usr.serialBud)
-
-        createRecyclerView(transactionRecyclerView, usr.transactions, usr.accounts)
-
-        return view
+        return MyViewHolder(view)
     }
 
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: MyViewHolder, position: Int) {
+
+        val account = dataset[position]
+
+        account.serial()
+
+        createPieChart(viewHolder.TraTw,
+            viewHolder.BudTw,
+            viewHolder.pieChartTra,
+            viewHolder.pieChartBud,
+            account.serialTra,
+            account.serialBud)
+
+        val accounts = mutableMapOf<String, Account>()
+
+        accounts[account.accId] = account
+
+
+        viewHolder.transactionRv.layoutManager = LinearLayoutManager(context)
+        viewHolder.transactionRv.adapter = TransactionAdapter(account.transactions, accounts)
+        viewHolder.accountsAlias.text = account.accAlias
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = dataset.size
     @SuppressLint("SetTextI18n")
     fun createPieChart(pieChartTextView: TextView,
                        pieChartSecondaryTextView: TextView,
@@ -118,22 +111,22 @@ class UserMain : Fragment() {
 
             if (traValue!=0f) {
                 datasetTra.add(PieEntry(traValue, tag))
-                pieColorsTra.add(ContextCompat.getColor(requireContext(), colorsList[counter]))
+                pieColorsTra.add(ContextCompat.getColor(context, colorsList[counter]))
             }
 
             if (budValue!=0f) {
                 datasetBud.add(PieEntry(budValue, ""))
-                pieColorsBud.add(ContextCompat.getColor(requireContext(), colorsList[counter]))
+                pieColorsBud.add(ContextCompat.getColor(context, colorsList[counter]))
             }
 
             if (traAdditionalValue!=0f){
                 datasetTra.add(PieEntry(traAdditionalValue, ""))
-                pieColorsTra.add(ColorUtils.setAlphaComponent(ContextCompat.getColor(requireContext(), colorsList[counter]), 150))
+                pieColorsTra.add(ColorUtils.setAlphaComponent(ContextCompat.getColor(context, colorsList[counter]), 150))
             }
 
             if (budAdditionalValue!=0f){
                 datasetBud.add(PieEntry(budAdditionalValue, ""))
-                pieColorsBud.add(ColorUtils.setAlphaComponent(ContextCompat.getColor(requireContext(), colorsList[counter]), 150))
+                pieColorsBud.add(ColorUtils.setAlphaComponent(ContextCompat.getColor(context, colorsList[counter]), 150))
             }
             counter += 1
         }
@@ -166,7 +159,7 @@ class UserMain : Fragment() {
         pieChartTra.holeRadius = 60f
 
         pieChartTra.data = pieDTTra
-        pieChartTra.setHoleColor(ContextCompat.getColor(requireContext(), R.color.black))
+        pieChartTra.setHoleColor(ContextCompat.getColor(context, R.color.black))
         pieChartTra.invalidate()
 
         val pieDSBud = PieDataSet(datasetBud, "Pie")
@@ -193,15 +186,9 @@ class UserMain : Fragment() {
         pieChartBud.holeRadius = 90f
 
         pieChartBud.data = pieDTBud
-        pieChartBud.setHoleColor(ContextCompat.getColor(requireContext(), R.color.black))
+        pieChartBud.setHoleColor(ContextCompat.getColor(context, R.color.black))
         pieChartBud.invalidate()
 
     }
-
-    private fun createRecyclerView(transactionRV: RecyclerView,
-                                   Transactions: List<Transaction>,
-                                   accounts: MutableMap<String, Account>){
-        transactionRV.layoutManager = LinearLayoutManager(activity)
-        transactionRV.adapter = TransactionAdapter(Transactions, accounts)
-    }
 }
+

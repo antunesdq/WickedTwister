@@ -263,7 +263,8 @@ class User(var usrId: String = "",
                             )
                             accounts[item["acc_id"] as String] = acc
                         }
-
+                        status = true
+                        countDownLatch.countDown()
                     }
                     else -> {
                         Log.v(logTag, response.code.toString())
@@ -273,6 +274,7 @@ class User(var usrId: String = "",
                 }
             }
         })
+        countDownLatch.await()
     }
 
     fun serial(){
@@ -301,12 +303,13 @@ class User(var usrId: String = "",
 
                         val format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ")
 
-                        for (item in entriesDataTra){
-                            serialTra[item.key] = item.value.toFloat()
-                        }
-
                         for (item in entriesDataBud){
                             serialBud[item.key] = item.value.toFloat()
+                            serialTra[item.key] = 0F
+                        }
+
+                        for (item in entriesDataTra){
+                            serialTra[item.key] = item.value.toFloat()
                         }
 
                         for (item in transactionsData){

@@ -62,10 +62,15 @@
             android:layout_marginBottom="15dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
+                android:id="@+id/login_user_pwd_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
+                android:textColor="@color/CthulhuPurple"
+                android:autofillHints="Password"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"
+                tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

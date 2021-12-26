@@ -1,14 +1,21 @@
 package com.example.wickedtwister
 
+import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class Login : Fragment() {
@@ -24,8 +31,16 @@ class Login : Fragment() {
         val etUsrDoc = view.findViewById<TextInputLayout>(R.id.login_user_doc)
         val etUsrPwd = view.findViewById<TextInputLayout>(R.id.login_user_pwd)
         val txLogMsg = view.findViewById<TextView>(R.id.login_message)
+        val et = view.findViewById<EditText>(R.id.login_user_pwd_et)
 
-        btLogin.setOnClickListener {
+        fun View.hideSoftInput() {
+            val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+        }
+
+        fun btlog(){
+            view.hideSoftInput()
+
             if (etUsrDoc.editText?.text.toString() == "" ||
                 etUsrPwd.editText?.text.toString() == ""){
                 txLogMsg.text = getString(R.string.login_missing_credentials)
@@ -40,6 +55,16 @@ class Login : Fragment() {
                     txLogMsg.text = getString(R.string.wrong_SSN_or_PWD)
                 }
             }
+        }
+
+        et.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                btlog()
+            }
+            true
+        }
+        btLogin.setOnClickListener {
+            btlog()
         }
 
         btSignup.setOnClickListener{

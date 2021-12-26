@@ -9,10 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 class TransactionAdapter (private val dataSet: List<Transaction>, private val accounts:MutableMap<String, Account>) :
         RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tagNameTv: TextView = view.findViewById(R.id.tra_card_tag_name)
         val traValueTv: TextView = view.findViewById(R.id.tra_card_tra_value)
@@ -20,9 +16,7 @@ class TransactionAdapter (private val dataSet: List<Transaction>, private val ac
         val traDateTv: TextView = view.findViewById(R.id.tra_card_tra_date)
         val accAliasTv: TextView = view.findViewById(R.id.tra_card_acc_alias)
 
-        init {
-            // Define click listener for the ViewHolder's View.
-        }
+
     }
 
     // Create new views (invoked by the layout manager)

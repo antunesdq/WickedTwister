@@ -30,7 +30,9 @@ class AccountMain : Fragment() {
         }
         val rview = view.findViewById<RecyclerView>(R.id.transaction_recycler_view)
         rview.layoutManager = LinearLayoutManager(context)
-        rview.adapter = TransactionRViewAdaptor(dataset = acc.transactions)
+        val accs = mutableMapOf<String, Account>()
+        accs[acc.accId] = acc
+        rview.adapter = TransactionAdapter(acc.transactions, accs)
         return view
     }
 
