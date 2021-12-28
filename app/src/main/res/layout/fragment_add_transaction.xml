@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="@string/cthulhu_do_mal"
             android:src="@drawable/ic_cthulhu"
             app:layout_constraintBottom_toTopOf="@id/add_transaction_date"
@@ -21,28 +21,19 @@
             app:layout_constraintRight_toRightOf="@id/add_transaction_date"
             app:tint="@color/lime" />
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <Button
             android:id="@+id/add_transaction_date"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/CthulhuPurple"
-            android:hint="@string/date"
-            android:theme="@style/TextInputLayout"
-            app:hintTextColor="@color/CthulhuPurple"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeColor="@color/lime"
+            android:layout_gravity="center"
+            android:text="@string/add_transaction"
             app:layout_constraintBottom_toTopOf="@+id/add_transaction_value"
             app:layout_constraintEnd_toEndOf="@+id/add_transaction_value"
             app:layout_constraintStart_toStartOf="@+id/add_transaction_value"
-            android:layout_marginBottom="13dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textColor="@color/lime"
+            android:backgroundTint="@color/CthulhuPurple"
+            android:layout_marginBottom="13dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_transaction_value"
@@ -61,6 +52,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/CthulhuPurple"/>
@@ -117,7 +109,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/sign_up"
+            android:text="@string/add_transaction"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

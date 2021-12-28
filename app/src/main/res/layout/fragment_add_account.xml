@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginBottom="148dp"
+            android:layout_marginBottom="75dp"
             android:contentDescription="@string/cthulhu_do_mal"
             android:src="@drawable/ic_cthulhu"
             app:layout_constraintBottom_toTopOf="@id/add_account_alias"
@@ -54,6 +54,28 @@
             app:hintTextColor="@color/CthulhuPurple"
             app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
+            app:layout_constraintBottom_toTopOf="@+id/add_account_refday"
+            app:layout_constraintEnd_toEndOf="@+id/add_account_refday"
+            app:layout_constraintStart_toStartOf="@+id/add_account_refday"
+            android:layout_marginBottom="12dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/CthulhuPurple"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_account_refday"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/CthulhuPurple"
+            android:hint="@string/refresh_day"
+            android:theme="@style/TextInputLayout"
+            app:hintTextColor="@color/CthulhuPurple"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeColor="@color/lime"
             app:layout_constraintBottom_toTopOf="@+id/add_account_button"
             app:layout_constraintEnd_toEndOf="@+id/add_account_button"
             app:layout_constraintStart_toStartOf="@+id/add_account_button"
@@ -61,6 +83,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/CthulhuPurple"/>

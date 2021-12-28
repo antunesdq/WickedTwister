@@ -11,7 +11,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.sql.Date
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
@@ -19,7 +21,8 @@ import java.util.concurrent.CountDownLatch
 class Account(var usrId:String = "",
               var accId:String = "",
               var tagName:String = "",
-              var accAlias:String = ""):Parcelable{
+              var accAlias:String = "",
+              var accRefDay:Int = 22):Parcelable{
 
     private val logTag = "AccountAPI"
     private val client = okhttp3.OkHttpClient()
@@ -45,7 +48,8 @@ class Account(var usrId:String = "",
         status = false
         val payload = mapOf("usr_id" to usrId,
             "acc_alias" to accAlias,
-            "tag_name" to tagName)
+            "tag_name" to tagName,
+            "acc_refday" to accRefDay)
         val requestBody = JSONObject(payload).toString().toRequestBody(mediaType)
         val request: Request = Request.Builder()
             .method("POST", requestBody)
@@ -103,6 +107,7 @@ class Account(var usrId:String = "",
                         accAlias = data["acc_alias"] as String
                         accId = data["acc_id"] as String
                         tagName = data["tag_name"] as String
+                        accRefDay = data["acc_refday"].toString().toInt()
                         status = true
                         countDownLatch.countDown()
                     }
@@ -212,16 +217,17 @@ class Account(var usrId:String = "",
                 when (response.code) {
                     200 -> {
                         Log.d(logTag, "200")
-
+                        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
                         val traMap = jsonToMap(JSONObject(response.body!!.string()))
 
                         for (key in traMap.keys){
                             val item = JSONObject(traMap[key] as String)
-                            transactions.add(Transaction(accId = accId,
+                            transactions.add(Transaction(
+                                accId = accId,
                                 traId = item["tra_id"] as String,
-                                traDate = item["tra_date"] as String,
+                                traDate = LocalDateTime.parse(item["tra_date"].toString(), format),
                                 traName = item["tra_name"] as String,
-                                traValue = item["tra_value"] as String,
+                                traValue = item["tra_value"].toString().toFloat(),
                                 tagName = item["tag_name"] as String,
                                 accAlias = accAlias))
                         }
@@ -277,11 +283,12 @@ class Account(var usrId:String = "",
 
                         for (item in transactionsData){
                             val newItem = jsonToMap(JSONObject(item.value))
-                            transactions.add(Transaction(accId = newItem["acc_id"].toString(),
+                            transactions.add(Transaction(
+                                accId = newItem["acc_id"].toString(),
                                 traId = newItem["tra_id"].toString(),
-                                traDate = LocalDate.parse(newItem["tra_date"], format).toString(),
+                                traDate = LocalDateTime.parse(newItem["tra_date"], format),
                                 traName = newItem["tra_name"].toString(),
-                                traValue = newItem["tra_value"].toString(),
+                                traValue = newItem["tra_value"].toString().toFloat(),
                                 tagName = newItem["tag_name"].toString())
                             )
                         }

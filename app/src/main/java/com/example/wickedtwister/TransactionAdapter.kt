@@ -34,9 +34,9 @@ class TransactionAdapter (private val dataSet: List<Transaction>, private val ac
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.tagNameTv.text = dataSet[position].tagName
-        viewHolder.traDateTv.text = dataSet[position].traDate
+        viewHolder.traDateTv.text = dataSet[position].traDate.toString()
         viewHolder.traNameTv.text = dataSet[position].traName
-        viewHolder.traValueTv.text = dataSet[position].traValue
+        viewHolder.traValueTv.text = dataSet[position].traValue.toString()
         viewHolder.accAliasTv.text = accounts[dataSet[position].accId]?.accAlias.toString()
     }
 

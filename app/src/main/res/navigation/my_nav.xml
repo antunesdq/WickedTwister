@@ -53,6 +53,9 @@
         <argument
             android:name="userid"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userMain_to_addAccount"
+            app:destination="@id/addAccount" />
     </fragment>
     <fragment
         android:id="@+id/userDetails"
@@ -116,10 +119,13 @@
             app:destination="@id/transactionMain" />
         <argument
             android:name="accountMain"
-            app:argType="com.example.wickedtwister.Account" />
+            app:argType="string" />
         <action
             android:id="@+id/action_accountMain_to_addTransaction"
             app:destination="@id/addTransaction" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
     </fragment>
     <fragment
         android:id="@+id/transactionMain"
@@ -154,5 +160,8 @@
         <action
             android:id="@+id/action_addTransaction_to_accountMain"
             app:destination="@id/accountMain" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
     </fragment>
 </navigation>

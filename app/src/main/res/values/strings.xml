@@ -46,4 +46,6 @@
     <string name="food">Food</string>
     <string name="scania_ab">Scania AB</string>
     <string name="_2021_10_21">2021-10-21</string>
+    <string name="refresh_day">Refresh Day (1 to 28)</string>
+    <string name="not_a_valid_location">Not a valid Location.</string>
 </resources>

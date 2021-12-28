@@ -24,6 +24,14 @@
         app:layout_constraintBottom_toBottomOf="@id/main_user_image"
         app:layout_constraintLeft_toRightOf="@id/main_user_image"
         app:layout_constraintTop_toTopOf="@id/main_user_image" />
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_a_valid_location"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@id/main_user_image"
+        app:layout_constraintTop_toTopOf="@id/main_user_image"/>
 
     <ImageView
         android:id="@+id/settings"

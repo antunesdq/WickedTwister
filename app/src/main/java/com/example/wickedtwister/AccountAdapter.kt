@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
@@ -16,17 +17,35 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlin.math.abs
 
 class AccountAdapter(private val dataset: List<Account>, val context: Context):
     RecyclerView.Adapter<AccountAdapter.MyViewHolder>() {
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
+
+    class MyViewHolder(view: View, listener: onItemClickListener) : RecyclerView.ViewHolder(view) {
         val pieChartTra: PieChart = view.findViewById(R.id.account_card_pie_chart)
         val pieChartBud: PieChart = view.findViewById(R.id.account_card_pie_chart_bud)
         val transactionRv: RecyclerView = view.findViewById(R.id.account_card_recycler_view)
         val accountsAlias: TextView = view.findViewById(R.id.account_card_acc_alias)
         val TraTw:TextView = view.findViewById(R.id.account_card_pie_chart_total_value)
         val BudTw:TextView = view.findViewById(R.id.account_card_pie_chart_budget_value)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(position = absoluteAdapterPosition)
+            }
+        }
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -35,7 +54,7 @@ class AccountAdapter(private val dataset: List<Account>, val context: Context):
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.account_card, viewGroup, false)
 
-        return MyViewHolder(view)
+        return MyViewHolder(view, mListener)
     }
 
     // Replace the contents of a view (invoked by the layout manager)

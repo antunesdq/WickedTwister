@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,13 +33,25 @@ class UserDetails : Fragment() {
         }
         val accountsRview = view.findViewById<RecyclerView>(R.id.detail_user_recycler_view)
         val accs = fazai(usr)
-        createAccountRecyclerView(accountsRview, accs, requireContext())
+        createAccountRecyclerView(accountsRview, accs, requireContext(), usr)
+
+        val settingsLocation: TextView = view.findViewById(R.id.location)
+        settingsLocation.text = "Accounts Details"
 
         return view
     }
-    fun createAccountRecyclerView(accountsRview: RecyclerView, Accounts:List<Account>, context:Context){
+    fun createAccountRecyclerView(accountsRview: RecyclerView, Accounts:List<Account>, context:Context, usr:User){
         accountsRview.layoutManager = LinearLayoutManager(activity)
-        accountsRview.adapter = AccountAdapter(Accounts, context)
+        val adapter = AccountAdapter(Accounts, context)
+        accountsRview.adapter = adapter
+        adapter.setOnItemClickListener(object: AccountAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val acc = Accounts[position]
+                val action = UserDetailsDirections.actionUserDetailsToAccountMain(acc.accId, usr)
+                    findNavController().navigate(action)
+            }
+
+        })
     }
     fun fazai(user:User): MutableList<Account> {
         user.getAccounts()

@@ -25,10 +25,14 @@ class AddAccount : Fragment() {
         createAccountbtn.setOnClickListener {
             val etAddAccountAlias = view.findViewById<TextInputLayout>(R.id.add_account_alias)
             val etAddAccountTag = view.findViewById<TextInputLayout>(R.id.add_account_tag)
+            val etAddAccountRefDay = view.findViewById<TextInputLayout>(R.id.add_account_refday)
+
             val acc = Account(usrId = args.userMain.usrId,
                 accAlias = etAddAccountAlias.editText?.text.toString(),
-                tagName = etAddAccountTag.editText?.text.toString()
+                tagName = etAddAccountTag.editText?.text.toString(),
+                accRefDay = etAddAccountRefDay.editText?.text.toString().toInt()
             )
+
             acc.create()
             if (acc.status){
                 val usr = args.userMain

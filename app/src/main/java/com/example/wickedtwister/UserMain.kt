@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
@@ -49,6 +50,16 @@ class UserMain : Fragment() {
         val pieChartBud:PieChart = view.findViewById(R.id.main_user_pie_chart_bud)
 
         val transactionRecyclerView:RecyclerView = view.findViewById(R.id.main_user_recycler_view)
+
+        val settingsImageView: ImageView = view.findViewById(R.id.settings)
+
+        val settingsLocation:TextView = view.findViewById(R.id.location)
+        settingsLocation.text = "User Dashboard"
+
+        settingsImageView.setOnClickListener {
+            val action = UserMainDirections.actionUserMainToAddAccount(usr)
+            findNavController().navigate(action)
+        }
 
         pieChartTra.setOnClickListener {
             val action = UserMainDirections.actionUserMainToUserDetails(usr)

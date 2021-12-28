@@ -10,19 +10,23 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
+import java.sql.Date
 import java.io.IOException
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
 @Parcelize
-class Transaction(var accId:String = "",
-                  var traValue:String = "",
-                  var traDate:String = "",
-                  var traName:String = "",
-                  var traId:String = "",
-                  var tagName:String="",
-                  var accAlias:String="", ):Parcelable{
+class Transaction(
+    var accId: String = "",
+    var traValue: Float,
+    var traDate: LocalDateTime = LocalDateTime.of(1, 1, 1,1,1,1),
+    var traName: String = "",
+    var traId: String = "",
+    var tagName: String = "",
+    var accAlias: String = "",
+):Parcelable{
 
     private val logTag = "TransactionAPI"
     private val client = okhttp3.OkHttpClient()
@@ -34,6 +38,7 @@ class Transaction(var accId:String = "",
     fun create(): Boolean {
         status = false
         val payload = mapOf("acc_id" to accId,
+            "tra_date" to traDate,
             "tra_value" to traValue,
             "tag_name" to tagName,
             "tra_name" to traName)
@@ -68,7 +73,6 @@ class Transaction(var accId:String = "",
 
         })
         countDownLatch.await()
-        get()
         return status
     }
 
@@ -89,20 +93,20 @@ class Transaction(var accId:String = "",
             override fun onResponse(call: Call, response: Response) {
                 when (response.code) {
                     200 -> {
-                        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+                        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ")
 
                         Log.d(logTag, "200")
                         val data = jsonToMap(JSONObject(response.body!!.string()))
-                        traId = data["usr_id"] as String
-                        accId = data["acc_id"] as String
-                        traValue = data["tra_value"] as String
-                        traName = data["tra_name"] as String
-                        tagName = data["tag_name"] as String
-                        traDate = LocalDate.parse(data["tra_date"], format).toString()
+                        traId = data["usr_id"].toString()
+                        accId = data["acc_id"].toString()
+                        traValue = data["tra_value"].toString().toFloat()
+                        traName = data["tra_name"].toString()
+                        tagName = data["tag_name"].toString()
+                        traDate = LocalDateTime.parse(data["tra_date"], format)
                         status = true
                         countDownLatch.countDown()
                     }
-                    else -> {4
+                    else -> {
                         Log.v(logTag, response.code.toString())
                         status = false
                         countDownLatch.countDown()

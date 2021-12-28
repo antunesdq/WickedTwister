@@ -2,7 +2,6 @@ package com.example.wickedtwister
 
 import android.os.Parcelable
 import android.util.Log
-import com.github.mikephil.charting.data.PieEntry
 import kotlinx.android.parcel.Parcelize
 import okhttp3.Call
 import okhttp3.Callback
@@ -12,7 +11,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.sql.Date
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
@@ -314,11 +315,12 @@ class User(var usrId: String = "",
 
                         for (item in transactionsData){
                             val newItem = jsonToMap(JSONObject(item.value))
-                            transactions.add(Transaction(accId = newItem["acc_id"].toString(),
+                            transactions.add(Transaction(
+                                accId = newItem["acc_id"].toString(),
                                 traId = newItem["tra_id"].toString(),
-                                traDate = LocalDate.parse(newItem["tra_date"], format).toString(),
+                                traDate = LocalDateTime.parse(newItem["tra_date"], format),
                                 traName = newItem["tra_name"].toString(),
-                                traValue = newItem["tra_value"].toString(),
+                                traValue = newItem["tra_value"].toString().toFloat(),
                                 tagName = newItem["tag_name"].toString())
                             )
                         }
