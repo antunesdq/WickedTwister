@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddAccount"
+    tools:context=".AddTransaction"
     android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,27 +14,27 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginBottom="75dp"
+            android:layout_marginBottom="145dp"
             android:contentDescription="@string/cthulhu_do_mal"
             android:src="@drawable/ic_cthulhu"
-            app:layout_constraintBottom_toTopOf="@id/add_account_alias"
-            app:layout_constraintLeft_toLeftOf="@id/add_account_alias"
-            app:layout_constraintRight_toRightOf="@id/add_account_alias"
+            app:layout_constraintBottom_toTopOf="@id/add_budget_tag"
+            app:layout_constraintLeft_toLeftOf="@id/add_budget_tag"
+            app:layout_constraintRight_toRightOf="@id/add_budget_tag"
             app:tint="@color/lime" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_account_alias"
+            android:id="@+id/add_budget_tag"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textColorHint="@color/CthulhuPurple"
-            android:hint="@string/account_alias"
+            android:hint="@string/tag"
             android:theme="@style/TextInputLayout"
             app:hintTextColor="@color/CthulhuPurple"
             app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
-            app:layout_constraintBottom_toTopOf="@+id/add_account_tag"
-            app:layout_constraintEnd_toEndOf="@+id/add_account_tag"
-            app:layout_constraintStart_toStartOf="@+id/add_account_tag"
+            app:layout_constraintBottom_toTopOf="@+id/add_budget_value"
+            app:layout_constraintEnd_toEndOf="@+id/add_budget_value"
+            app:layout_constraintStart_toStartOf="@+id/add_budget_value"
             android:layout_marginBottom="12dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -46,40 +46,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_account_tag"
+            android:id="@+id/add_budget_value"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:textColorHint="@color/CthulhuPurple"
-            android:hint="@string/account_tag"
+            android:hint="@string/value"
             android:theme="@style/TextInputLayout"
             app:hintTextColor="@color/CthulhuPurple"
             app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
-            app:layout_constraintBottom_toTopOf="@+id/add_account_refday"
-            app:layout_constraintEnd_toEndOf="@+id/add_account_refday"
-            app:layout_constraintStart_toStartOf="@+id/add_account_refday"
-            android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_account_refday"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/CthulhuPurple"
-            android:hint="@string/refresh_day"
-            android:theme="@style/TextInputLayout"
-            app:hintTextColor="@color/CthulhuPurple"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeColor="@color/lime"
-            app:layout_constraintBottom_toTopOf="@+id/add_account_button"
-            app:layout_constraintEnd_toEndOf="@+id/add_account_button"
-            app:layout_constraintStart_toStartOf="@+id/add_account_button"
+            app:layout_constraintBottom_toTopOf="@+id/add_budget_button"
+            app:layout_constraintEnd_toEndOf="@+id/add_budget_button"
+            app:layout_constraintStart_toStartOf="@+id/add_budget_button"
             android:layout_marginBottom="12dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -87,15 +65,15 @@
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
+                android:textColor="@color/CthulhuPurple" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/add_account_button"
+            android:id="@+id/add_budget_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/create_account"
+            android:text="@string/add_budget"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

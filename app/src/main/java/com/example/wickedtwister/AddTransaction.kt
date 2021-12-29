@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
-import java.time.format.DateTimeFormatter
 import android.app.DatePickerDialog
+import androidx.appcompat.widget.SwitchCompat
 import java.time.LocalDateTime
 import java.util.*
 
@@ -33,6 +33,7 @@ class AddTransaction : Fragment() {
         val etAddTransactionName = view.findViewById<TextInputLayout>(R.id.add_transaction_tra_name)
         val etAddTransactionValue = view.findViewById<TextInputLayout>(R.id.add_transaction_value)
         val btAddTransaction = view.findViewById<Button>(R.id.add_transaction_button)
+        val swTransactionType = view.findViewById<SwitchCompat>(R.id.add_transaction_switch)
 
         val c = Calendar.getInstance()
 
@@ -44,10 +45,10 @@ class AddTransaction : Fragment() {
         var newYear = 1
         btAddTransactionDate.setOnClickListener {
             val dpd = DatePickerDialog(requireContext(), { view, myear, mmonth, mday ->
-                btAddTransactionDate.text = "${myear}/${mmonth}/${mday}"
                 newDay = mday
-                newMonth = mmonth
+                newMonth = mmonth + 1
                 newYear = myear
+                btAddTransactionDate.text = "${newYear}/${newMonth}/${newDay}"
             }, year,month,day)
             dpd.show()
         }
@@ -59,8 +60,14 @@ class AddTransaction : Fragment() {
                 tagName = etAddTransactionTag.editText?.text.toString(),
                 traValue = etAddTransactionValue.editText?.text.toString().toFloat(),
                 traName = etAddTransactionName.editText?.text.toString(),
-//                traDate = Date.valueOf(LocalDate.parse("${newYear}-${newMonth}-${newDay}T17:11:00Z", format).toString(),)
-                traDate = LocalDateTime.of(newYear,newMonth,newDay,0,0,0,0)
+                traType = if(swTransactionType.isChecked){ "Payment" }else{ "Expense" },
+                traDate = LocalDateTime.of(newYear,
+                    newMonth,
+                    newDay,
+                    LocalDateTime.now().hour,
+                    LocalDateTime.now().minute,
+                    LocalDateTime.now().second,
+                    0)
             )
             tra.create()
             acc = args.accountMain

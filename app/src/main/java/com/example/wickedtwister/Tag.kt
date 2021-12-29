@@ -19,10 +19,12 @@ class Tag(var tagName: String = "",
            var imgName:String = "",
            var tagColour: String = ""): Parcelable {
 
+    private val ip = Utils().ipaws
+
     private val logTag = "TagAPI"
     private val client = okhttp3.OkHttpClient()
     private val mediaType = "application/json; charset=utf-8".toMediaType()
-    private val tagUrl = "http://10.0.2.2:8000/tag"
+    private val tagUrl = "http://${ip}:8000/tag"
 
 
     var status:Boolean = false

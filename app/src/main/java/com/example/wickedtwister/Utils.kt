@@ -20,3 +20,7 @@ fun jsonToMap(json: JSONObject): MutableMap<String, String> {
     }
 
 
+class Utils {
+    //val ipaws = "54.72.218.49"
+    val ipaws = "10.0.2.2"
+}

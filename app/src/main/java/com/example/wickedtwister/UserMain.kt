@@ -108,7 +108,14 @@ class UserMain : Fragment() {
             R.color.holo_blue_dark,
             R.color.holo_green_dark,
             R.color.holo_orange_dark,
-            R.color.holo_red_dark)
+            R.color.holo_red_dark,
+            R.color.win8_blue,
+            R.color.win8_brown,
+            R.color.win8_green,
+            R.color.win8_orange,
+            R.color.teal,
+            R.color.Orange,
+            R.color.OrangeRed)
 
         val datasetBud = mutableListOf<PieEntry>()
         val datasetTra = mutableListOf<PieEntry>()

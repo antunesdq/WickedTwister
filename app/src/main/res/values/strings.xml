@@ -48,4 +48,11 @@
     <string name="_2021_10_21">2021-10-21</string>
     <string name="refresh_day">Refresh Day (1 to 28)</string>
     <string name="not_a_valid_location">Not a valid Location.</string>
+    <string name="add_date">Add Date</string>
+    <string name="receive">Receive</string>
+    <string name="send">Send</string>
+    <string name="add_budget">Add Budget</string>
+    <string name="payment">Payment</string>
+    <string name="expense">Expense</string>
+    <string name="budget_type">Budget Type</string>
 </resources>

@@ -11,43 +11,37 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.sql.Date
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
 @Parcelize
-class Transaction(
-    var accId: String = "",
-    var traValue: Float,
-    var traDate: LocalDateTime = LocalDateTime.of(1, 1, 1,1,1,1),
-    var traName: String = "",
-    var traId: String = "",
-    var tagName: String = "",
-    var traType: String = "",
-    var accAlias: String = "",
+class Budget(var accId: String = "",
+             var budValue: Float,
+             var budId: String = "",
+             var tagName: String = ""
 ):Parcelable{
 
     private val ip = Utils().ipaws
 
-    private val logTag = "TransactionAPI"
+    private val logTag = "BudgetAPI"
     private val client = okhttp3.OkHttpClient()
     private val mediaType = "application/json; charset=utf-8".toMediaType()
-    private val transactionUrl = "http://${ip}:8000/transaction"
+    private val budgetUrl = "http://${ip}:8000/budget"
 
     var status:Boolean = false
 
     fun create(): Boolean {
         status = false
         val payload = mapOf("acc_id" to accId,
-            "tra_date" to traDate,
-            "tra_value" to traValue,
             "tag_name" to tagName,
-            "tra_name" to traName,
-            "tra_type" to traType)
+            "bud_value" to budValue)
         val requestBody = JSONObject(payload).toString().toRequestBody(mediaType)
         val request: Request = Request.Builder()
             .method("POST", requestBody)
-            .url(transactionUrl)
+            .url(budgetUrl)
             .build()
         val countDownLatch = CountDownLatch(1)
         client.newCall(request).enqueue(object : Callback {
@@ -61,7 +55,7 @@ class Transaction(
                     201 ->{
                         Log.d(logTag, "201")
                         val data = jsonToMap(JSONObject(response.body!!.string()))
-                        traId = data["tra_id"] as String
+                        budId = data["bud_id"] as String
                         status = true
                         countDownLatch.countDown()
                     }
@@ -81,7 +75,7 @@ class Transaction(
     fun get(): Boolean {
         status = false
         val request: Request = Request.Builder()
-            .url("${transactionUrl}?tra_id=$traId")
+            .url("${budgetUrl}?tra_id=$budId")
             .build()
         val countDownLatch = CountDownLatch(1)
         client.newCall(request).enqueue(object : Callback {
@@ -99,13 +93,10 @@ class Transaction(
 
                         Log.d(logTag, "200")
                         val data = jsonToMap(JSONObject(response.body!!.string()))
-                        traId = data["usr_id"].toString()
+                        budId = data["usr_id"].toString()
                         accId = data["acc_id"].toString()
-                        traValue = data["tra_value"].toString().toFloat()
-                        traName = data["tra_name"].toString()
+                        budValue = data["tra_value"].toString().toFloat()
                         tagName = data["tag_name"].toString()
-                        traType = data["tra_type"].toString()
-                        traDate = LocalDateTime.parse(data["tra_date"], format)
                         status = true
                         countDownLatch.countDown()
                     }
@@ -124,11 +115,11 @@ class Transaction(
 
     fun update(): Boolean {
         status = false
-        val payload = mapOf("tra_id" to traId, "tra_value" to traValue)
+        val payload = mapOf("tra_id" to budId, "tra_value" to budValue)
         val requestBody = JSONObject(payload).toString().toRequestBody(mediaType)
         val request: Request = Request.Builder()
             .method("PUT", requestBody)
-            .url(transactionUrl)
+            .url(budgetUrl)
             .build()
         val countDownLatch = CountDownLatch(1)
         client.newCall(request).enqueue(object : Callback {
@@ -163,11 +154,11 @@ class Transaction(
 
     fun delete(): Boolean {
         status = false
-        val payload = mapOf("tra_id" to traId)
+        val payload = mapOf("tra_id" to budId)
         val requestBody = JSONObject(payload).toString().toRequestBody(mediaType)
         val request: Request = Request.Builder()
             .method("DELETE", requestBody)
-            .url(transactionUrl)
+            .url(budgetUrl)
             .build()
         val countDownLatch = CountDownLatch(1)
         client.newCall(request).enqueue(object : Callback {

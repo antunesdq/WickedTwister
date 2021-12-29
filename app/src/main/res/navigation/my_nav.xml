@@ -120,12 +120,12 @@
         <argument
             android:name="accountMain"
             app:argType="string" />
-        <action
-            android:id="@+id/action_accountMain_to_addTransaction"
-            app:destination="@id/addTransaction" />
         <argument
             android:name="userMain"
             app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_accountMain_to_menu"
+            app:destination="@id/menu" />
     </fragment>
     <fragment
         android:id="@+id/transactionMain"
@@ -157,11 +157,44 @@
         <argument
             android:name="accountMain"
             app:argType="com.example.wickedtwister.Account" />
-        <action
-            android:id="@+id/action_addTransaction_to_accountMain"
-            app:destination="@id/accountMain" />
         <argument
             android:name="userMain"
             app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_addTransaction_to_accountMain"
+            app:destination="@id/accountMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBudget"
+        android:name="com.example.wickedtwister.addBudget"
+        android:label="fragment_add_budget"
+        tools:layout="@layout/fragment_add_budget" >
+        <argument
+        android:name="accountMain"
+        app:argType="com.example.wickedtwister.Account" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_addBudget_to_accountMain"
+            app:destination="@id/accountMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.example.wickedtwister.menu"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <argument
+            android:name="accountMain"
+            app:argType="com.example.wickedtwister.Account" />
+        <argument
+            android:name="userMain"
+            app:argType="com.example.wickedtwister.User" />
+        <action
+            android:id="@+id/action_menu2_to_addBudget"
+            app:destination="@id/addBudget" />
+        <action
+            android:id="@+id/action_menu2_to_addTransaction"
+            app:destination="@id/addTransaction" />
     </fragment>
 </navigation>

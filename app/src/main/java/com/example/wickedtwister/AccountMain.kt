@@ -58,7 +58,7 @@ class AccountMain : Fragment() {
 
 
         settingsImageView.setOnClickListener {
-            val action = AccountMainDirections.actionAccountMainToAddTransaction(acc, usr)
+            val action = AccountMainDirections.actionAccountMainToMenu(acc, usr)
             findNavController().navigate(action)
         }
 
@@ -108,7 +108,14 @@ class AccountMain : Fragment() {
             R.color.holo_blue_dark,
             R.color.holo_green_dark,
             R.color.holo_orange_dark,
-            R.color.holo_red_dark)
+            R.color.holo_red_dark,
+            R.color.win8_blue,
+            R.color.win8_brown,
+            R.color.win8_green,
+            R.color.win8_orange,
+            R.color.teal,
+            R.color.Orange,
+            R.color.OrangeRed)
 
         val datasetBud = mutableListOf<PieEntry>()
         val datasetTra = mutableListOf<PieEntry>()

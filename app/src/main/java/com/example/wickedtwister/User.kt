@@ -17,6 +17,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
+
 @Parcelize
 class User(var usrId: String = "",
            var usrDoc:String = "",
@@ -24,12 +25,14 @@ class User(var usrId: String = "",
            var usrEmail: String = "",
            var usrNickname:String = ""):Parcelable{
 
+    private val ip = Utils().ipaws
+
     private val logTag = "UserAPI"
     private val client = okhttp3.OkHttpClient()
     private val mediaType = "application/json; charset=utf-8".toMediaType()
-    private val usrUrl = "http://10.0.2.2:8000/user"
-    private val usrSerialUrl = "http://10.0.2.2:8000/user/serial"
-    private val accountUrl = "http://10.0.2.2:8000/account"
+    private val usrUrl = "http://${ip}:8000/user"
+    private val usrSerialUrl = "http://${ip}:8000/user/serial"
+    private val accountUrl = "http://${ip}:8000/account"
 
     var accounts:MutableMap<String, Account> = mutableMapOf()
 
@@ -324,6 +327,8 @@ class User(var usrId: String = "",
                                 tagName = newItem["tag_name"].toString())
                             )
                         }
+
+                        transactions.sortByDescending { it.traDate }
 
                         status = true
                         countDownLatch.countDown()

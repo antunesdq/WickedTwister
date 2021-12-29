@@ -24,12 +24,14 @@ class Account(var usrId:String = "",
               var accAlias:String = "",
               var accRefDay:Int = 22):Parcelable{
 
+    private val ip = Utils().ipaws
+
     private val logTag = "AccountAPI"
     private val client = okhttp3.OkHttpClient()
     private val mediaType = "application/json; charset=utf-8".toMediaType()
-    private val accountUrl = "http://10.0.2.2:8000/account"
-    private val accountSerialUrl = "http://10.0.2.2:8000/account/serial"
-    private val transactionUrl = "http://10.0.2.2:8000/transaction"
+    private val accountUrl = "http://${ip}:8000/account"
+    private val accountSerialUrl = "http://${ip}:8000/account/serial"
+    private val transactionUrl = "http://${ip}:8000/transaction"
 
 
 
@@ -292,6 +294,7 @@ class Account(var usrId:String = "",
                                 tagName = newItem["tag_name"].toString())
                             )
                         }
+                        transactions.sortByDescending { it.traDate }
 
                         status = true
                         countDownLatch.countDown()

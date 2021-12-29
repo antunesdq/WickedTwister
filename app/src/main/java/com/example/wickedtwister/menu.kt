@@ -6,33 +6,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import java.time.LocalDateTime
 
 
 class menu : Fragment() {
-    //private val args by navArgs<menuArgs>()
+    private val args by navArgs<AddTransactionArgs>()
+    private lateinit var usr: User
+    private lateinit var acc: Account
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        val btAddTransaction = view.findViewById<Button>(R.id.menu_add_transaction_button)
-        val btAddAccount = view.findViewById<Button>(R.id.menu_add_account_button)
+        val btMenuAddTransaction = view.findViewById<Button>(R.id.menu_add_transaction_button)
+        val btMenuAddBudget = view.findViewById<Button>(R.id.menu_add_budget_button)
 
-       // btAddAccount.setOnClickListener {
-         //   val action = menuDirections.actionMenuToAddAccount(args.userMain)
-           // findNavController().navigate(action)
-        //}
+        btMenuAddTransaction.setOnClickListener {
+            acc = args.accountMain
+            usr = args.userMain
+            val action = menuDirections.actionMenu2ToAddTransaction(accountMain = acc, userMain = usr)
+            findNavController().navigate(action)
+        }
 
-//        btAddTransaction.setOnClickListener {
-  //          val action = menuDirections.actionMenuToAddTransaction(args.userMain, args.accountMain)
-    //        findNavController().navigate(action)
-      //  }
+        btMenuAddBudget.setOnClickListener {
+            acc = args.accountMain
+            usr = args.userMain
+            val action = menuDirections.actionMenu2ToAddBudget(accountMain = acc, userMain = usr)
+            findNavController().navigate(action)
+        }
 
         return view
     }
-
 
 }
