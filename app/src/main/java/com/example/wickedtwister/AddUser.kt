@@ -1,5 +1,6 @@
 package com.example.wickedtwister
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
+import org.w3c.dom.Text
 
 class AddUser : Fragment() {
 
@@ -18,7 +20,18 @@ class AddUser : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_add_user, container, false)
+        fun addpref(etAddUserDocument: TextInputLayout, etAddUserPassword: TextInputLayout){
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+            with (sharedPref.edit()) {
+                putString("username", etAddUserDocument.editText?.text.toString())
+                apply()
+            }
 
+            with (sharedPref.edit()) {
+                putString("password", etAddUserPassword.editText?.text.toString())
+                apply()
+            }
+        }
         val btAddUser = view.findViewById<Button>(R.id.add_user_button)
         val etAddUserDocument = view.findViewById<TextInputLayout>(R.id.add_user_doc)
         val etAddUserPassword = view.findViewById<TextInputLayout>(R.id.add_user_pwd)
@@ -39,6 +52,7 @@ class AddUser : Fragment() {
                 usr.create()
                 usr.login()
                 if (usr.status) {
+                    addpref(etAddUserDocument, etAddUserPassword)
                     val action = AddUserDirections.actionAddUserToUserMain(usr.usrId)
                     findNavController().navigate(action)
                 } else {
