@@ -12,8 +12,11 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import android.app.DatePickerDialog
 import androidx.appcompat.widget.SwitchCompat
+import co.lujun.androidtagview.TagContainerLayout
 import java.time.LocalDateTime
 import java.util.*
+import co.lujun.androidtagview.TagView
+import co.lujun.androidtagview.TagView.OnTagClickListener
 
 
 class AddTransaction : Fragment() {
@@ -34,15 +37,19 @@ class AddTransaction : Fragment() {
         val etAddTransactionValue = view.findViewById<TextInputLayout>(R.id.add_transaction_value)
         val btAddTransaction = view.findViewById<Button>(R.id.add_transaction_button)
         val swTransactionType = view.findViewById<SwitchCompat>(R.id.add_transaction_switch)
+        val tagview = view.findViewById<TagContainerLayout>(R.id.add_transaction_tagview)
 
         val c = Calendar.getInstance()
-
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         var newDay = 1
         var newMonth = 1
         var newYear = 1
+
+        val tags = args.accountMain .serialBud.keys.toList()
+        tagview.tags = tags
+
         btAddTransactionDate.setOnClickListener {
             val dpd = DatePickerDialog(requireContext(), { view, myear, mmonth, mday ->
                 newDay = mday
@@ -81,6 +88,24 @@ class AddTransaction : Fragment() {
 
 
         }
+
+        tagview.setOnTagClickListener(object : OnTagClickListener {
+            override fun onTagClick(position: Int, text: String) {
+                etAddTransactionTag.editText?.setText(text)
+            }
+
+            override fun onTagLongClick(position: Int, text: String) {
+                // ...
+            }
+
+            override fun onSelectedTagDrag(position: Int, text: String) {
+                // ...
+            }
+
+            override fun onTagCrossClick(position: Int) {
+                // ...
+            }
+        })
         return view
     }
 }

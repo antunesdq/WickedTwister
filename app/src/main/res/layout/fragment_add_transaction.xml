@@ -11,142 +11,150 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/cthulhu_do_mal"
-            android:src="@drawable/ic_cthulhu"
-            app:layout_constraintBottom_toTopOf="@id/add_transaction_date"
-            app:layout_constraintLeft_toLeftOf="@id/add_transaction_date"
-            app:layout_constraintRight_toRightOf="@id/add_transaction_date"
-            app:tint="@color/lime" />
-
 
         <Button
             android:id="@+id/add_transaction_date"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="13dp"
+            android:backgroundTint="@color/CthulhuPurple"
             android:text="@string/add_date"
+            android:textColor="@color/lime"
             app:layout_constraintBottom_toTopOf="@+id/add_transaction_value"
             app:layout_constraintEnd_toEndOf="@+id/add_transaction_value"
-            app:layout_constraintStart_toStartOf="@+id/add_transaction_value"
-            android:textColor="@color/lime"
-            android:backgroundTint="@color/CthulhuPurple"
-            android:layout_marginBottom="13dp"/>
+            app:layout_constraintStart_toStartOf="@+id/add_transaction_value" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_transaction_value"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/CthulhuPurple"
+            android:layout_marginBottom="13dp"
             android:hint="@string/value"
+            android:textColorHint="@color/CthulhuPurple"
             android:theme="@style/TextInputLayout"
-            app:hintTextColor="@color/CthulhuPurple"
-            app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/CthulhuPurple"
             app:layout_constraintBottom_toTopOf="@+id/add_transaction_tag"
             app:layout_constraintEnd_toEndOf="@+id/add_transaction_tag"
-            app:layout_constraintStart_toStartOf="@+id/add_transaction_tag"
-            android:layout_marginBottom="13dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintStart_toStartOf="@+id/add_transaction_tag">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
+                android:inputType="number"
+                android:textColor="@color/CthulhuPurple" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_transaction_tag"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/CthulhuPurple"
+            android:layout_marginBottom="120dp"
             android:hint="@string/tag"
+            android:textColorHint="@color/CthulhuPurple"
             android:theme="@style/TextInputLayout"
-            app:hintTextColor="@color/CthulhuPurple"
-            app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/CthulhuPurple"
             app:layout_constraintBottom_toTopOf="@+id/add_transaction_tra_name"
             app:layout_constraintEnd_toEndOf="@+id/add_transaction_tra_name"
-            app:layout_constraintStart_toStartOf="@+id/add_transaction_tra_name"
-            android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintStart_toStartOf="@+id/add_transaction_tra_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
+                android:textColor="@color/CthulhuPurple" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/add_transaction_tagview"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            app:container_background_color="@color/black"
+            app:container_border_color="@color/lime"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/add_transaction_tag"
+            app:layout_constraintRight_toRightOf="@id/add_transaction_tag"
+            app:layout_constraintTop_toBottomOf="@id/add_transaction_tag"
+            app:tag_background_color="@color/CthulhuPurple"
+            app:tag_border_color="@color/transparent"
+            app:tag_clickable="true"
+            app:tag_text_color="@color/lime"
+            app:tag_theme="none"
+            app:vertical_interval="10dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_transaction_tra_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/CthulhuPurple"
+            android:layout_marginBottom="12dp"
             android:hint="@string/sender_receiver"
+            android:textColorHint="@color/CthulhuPurple"
             android:theme="@style/TextInputLayout"
-            app:hintTextColor="@color/CthulhuPurple"
-            app:boxStrokeWidth="1dp"
             app:boxStrokeColor="@color/lime"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/CthulhuPurple"
             app:layout_constraintBottom_toTopOf="@+id/add_transaction_button"
             app:layout_constraintEnd_toEndOf="@+id/add_transaction_button"
-            app:layout_constraintStart_toStartOf="@+id/add_transaction_button"
-            android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintStart_toStartOf="@+id/add_transaction_button">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/CthulhuPurple"/>
+                android:textColor="@color/CthulhuPurple" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/add_transaction_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/add_transaction"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/lime"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="150dp"
             android:backgroundTint="@color/CthulhuPurple"
-            android:layout_marginBottom="50dp"/>
+            android:text="@string/add_transaction"
+            android:textColor="@color/lime"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/add_transaction_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="140dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginEnd="140dp"
             app:thumbTint="@color/lime"
-            app:trackTint="@color/CthulhuPurple"/>
+            app:trackTint="@color/CthulhuPurple" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:text="@string/expense"
             android:textColor="@color/lime"
-            app:layout_constraintRight_toLeftOf="@id/add_transaction_switch"
             app:layout_constraintBottom_toBottomOf="@id/add_transaction_switch"
-            app:layout_constraintTop_toTopOf="@id/add_transaction_switch"
-            android:layout_marginEnd="10dp"/>
+            app:layout_constraintRight_toLeftOf="@id/add_transaction_switch"
+            app:layout_constraintTop_toTopOf="@id/add_transaction_switch" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="@string/payment"
             android:textColor="@color/lime"
-            app:layout_constraintLeft_toRightOf="@id/add_transaction_switch"
             app:layout_constraintBottom_toBottomOf="@id/add_transaction_switch"
-            app:layout_constraintTop_toTopOf="@id/add_transaction_switch"
-            android:layout_marginStart="10dp"/>
+            app:layout_constraintLeft_toRightOf="@id/add_transaction_switch"
+            app:layout_constraintTop_toTopOf="@id/add_transaction_switch" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
